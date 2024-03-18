@@ -1,19 +1,24 @@
-import prisma from "@/app/prismadb"
-import { NextResponse } from "next/server"
-import bcrypt from "bcrypt"
-import { randomUUID } from "crypto"
-import {z} from "zod"
-import { SignUpSchema } from "@/ZodSchema/UserSchema"
-import nodemailer from "nodemailer"
+import prisma from "@/app/prismadb";
+import { NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+import { randomUUID } from "crypto";
+import { z } from "zod";
+import { SignUpSchema } from "@/ZodSchema/UserSchema";
+import nodemailer from "nodemailer";
 
-type SignupSchemaT = z.infer<typeof SignUpSchema>
+type SignupSchemaT = z.infer<typeof SignUpSchema>;
 
-export async function POST (request: Request){
-    const body:SignupSchemaT = await request.json()
-    console.log(SignUpSchema.safeParse(body))
+export async function POST(request: Request) {
+    // Here we add the method check
+    if (request.method !== 'POST') {
+        return new Response(JSON.stringify({ message: 'Method Not Allowed' }), { status: 405, headers: { 'Content-Type': 'application/json' } });
+    }
 
-    if(SignUpSchema.safeParse(body).success === false){
-        return NextResponse.json("Data provided is not valid", {status:500})
+    const body: SignupSchemaT = await request.json();
+    console.log(SignUpSchema.safeParse(body));
+
+    if (SignUpSchema.safeParse(body).success === false) {
+        return NextResponse.json("Data provided is not valid", { status: 500 });
     }
 
     const userExist = await prisma.user.findUnique({
