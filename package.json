@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
+
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -66,4 +68,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC"
+  
+
 }
