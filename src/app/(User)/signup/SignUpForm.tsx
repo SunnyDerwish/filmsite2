@@ -34,7 +34,7 @@ const SignUpForm = (props: Props) => {
      
     async function onSubmit(values: z.infer<typeof SignUpSchema>) {
       try {
-        const response = await axios.post('/api/signup',{
+        const response = await axios.post('/api/user/signup', {
             username:values.username,
             email:values.email,
             password:values.password,
@@ -47,7 +47,7 @@ const SignUpForm = (props: Props) => {
       } catch (error) {
         console.log(error)
         toast({
-            description: "Something error happpended",
+            description: "Something wrong happened",
         })
       }
     }
