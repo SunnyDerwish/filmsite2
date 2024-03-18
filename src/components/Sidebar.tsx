@@ -2,7 +2,7 @@
 import classNames from "classnames";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from "react";
-import { faHome, faNewspaper, faUserFriends, faVideo, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faNewspaper, faUserFriends, faVideo, faSignOutAlt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 const menuItems = [
   { id: 1, label: "Home", icon: faHome, link: "/" },
@@ -16,7 +16,7 @@ const Sidebar = () => {
 
   const wrapperClasses = "fixed top-0 left-0 h-screen w-80 px-4 pt-8 pb-4 bg-light flex justify-between flex-col";
 
-  const getNavItemClasses = (menu) => {
+  const getNavItemClasses = (menu: { id?: any; label?: string; icon?: IconDefinition; link?: string; }) => {
     return classNames(
       "flex items-center cursor-pointer hover:bg-light-lighter rounded w-full overflow-hidden whitespace-nowrap",
       {
