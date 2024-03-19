@@ -34,7 +34,7 @@ const SignUpForm = (props: Props) => {
      
     async function onSubmit(values: z.infer<typeof SignUpSchema>) {
       try {
-        const response = await axios.post('/api/user/signup', {
+        const response = await axios.post('/api/signup', {
             username:values.username,
             email:values.email,
             password:values.password,
